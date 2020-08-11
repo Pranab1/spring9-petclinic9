@@ -25,6 +25,13 @@ apt install -y maven
 mvn -version
 
 
+##################...........................######################
+#setup jenkins
+#######Follow the instructions from URL https://pkg.jenkins.io/debian-stable/
+#####open jenkins URL and install suggested plugins
+######Create a user
+
+
 
 ################....................................######################
 #Install Docker
