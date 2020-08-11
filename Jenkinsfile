@@ -33,8 +33,8 @@ pipeline{
            steps {
                echo "Pushing Docker Image"
                 script{
-                        withDockerRegistry('',registrycredential) {
-                              dockerImage.push()
+                       withDockerRegistry(credentialsId: 'docker_hub_pranab1') {
+                                  dockerImage.push()
                  }
                          
                   } 
@@ -47,15 +47,7 @@ pipeline{
                 echo "Deploy to Dev Environment"
                   
                   }
-            }
-         stage('checkout'){
-               steps{
-                     script{
-                           checkout
-                     }
-               }
-         }
-               
+            }        
             
        }
    }
