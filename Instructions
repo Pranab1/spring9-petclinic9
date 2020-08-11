@@ -2,6 +2,7 @@
 # Create a EC2 instance
 # Open putty
 # ubuntu@<ipaddress>
+add ppk file into Auth part of putty
 
 
 
@@ -43,7 +44,7 @@ sudo usermod -aG docker jenkins
 
 
 ###############....................................#######################
-# configure dockder to be controlled by Jenkins
+# configure docker to be controlled by Jenkins
 sudo chmod 666 /var/run/docker.sock
 sudo visudo
 
