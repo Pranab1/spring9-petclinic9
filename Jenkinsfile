@@ -33,7 +33,7 @@ pipeline{
            steps {
                echo "Pushing Docker Image"
                 script{
-                       withDockerRegistry(credentialsId: 'docker_hub_pranab1') {
+                       docker.withRegistry('',registrycredential) {
                                   dockerImage.push()
                  }
                          
