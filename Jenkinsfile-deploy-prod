@@ -4,12 +4,18 @@ pipeline{
       stage('Deploy to Prod1'){
         steps{
          echo 'Deploying to Production1'
+         sshagent(['ssh-key']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.88.53.129 docker rm -f petclinic || true"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.88.53.129 docker rm -f petclinic || true"
+     }
          }
          }
          
          stage('Deploy to Prod2'){
         steps{
          echo 'Deploying to Production2'
+         sshagent(['ssh-key']) {
+       
          }
          }
          
