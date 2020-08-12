@@ -46,6 +46,7 @@ pipeline{
         stage('Deploy to Dev') {
             steps {
                 echo "Deploy to Dev Environment"
+                 sh "docker run -d --name=spring9-petclinic9 -p 8082:8080 pranab1/spring9-petclinic9"
                   
                   }
             }        
