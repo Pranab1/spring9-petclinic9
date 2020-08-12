@@ -6,7 +6,7 @@ pipeline{
          echo 'Deploying to Production1'
          sshagent(['ssh-key']) {
             sh "ssh -o StrictHostKeyChecking=no ubuntu@3.88.53.129 docker rm -f spring9-petclinic9 || true"
-            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.88.53.129 docker run -d --name=spring9-petclinic9 -p 8082:8080 spring9-petclinic9"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.88.53.129 docker run -d --name=spring9-petclinic9 -p 8082:8080 pranab1/spring9-petclinic9"
      }
          }
          }
@@ -16,7 +16,7 @@ pipeline{
          echo 'Deploying to Production2'
          sshagent(['ssh-key']) {
          sh "ssh -o StrictHostKeyChecking=no ubuntu@3.236.155.186 docker rm -f spring9-petclinic9 || true"
-            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.236.155.186 docker run -d --name=spring9-petclinic9 -p 8082:8080 spring9-petclinic9"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.236.155.186 docker run -d --name=spring9-petclinic9 -p 8082:8080 pranab1/spring9-petclinic9"
        
          }
          }
