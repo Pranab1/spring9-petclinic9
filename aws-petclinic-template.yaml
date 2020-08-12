@@ -14,7 +14,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       SubnetId: !Select [0, !Ref ELBSubnet]
-      ImageId: ami-02354e95b39ca8dec
+      ImageId: ami-0bcc094591f354be2
       InstanceType: t2.micro
       KeyName: !Ref SSHKey
       SecurityGroupIds:
@@ -24,7 +24,7 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
-          amazon-linux-extras install docker
+          ubuntu install docker
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
@@ -34,7 +34,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       SubnetId: !Select [1, !Ref ELBSubnet]
-      ImageId: ami-02354e95b39ca8dec
+      ImageId: ami-0bcc094591f354be2
       InstanceType: t2.micro
       KeyName: !Ref SSHKey
       SecurityGroupIds:
@@ -44,7 +44,7 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
-          amazon-linux-extras install docker
+          ubuntu install docker
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
@@ -56,9 +56,9 @@ Resources:
       GroupDescription: "ELB SG"
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
-          FromPort: 8081
+          FromPort: 8082
           IpProtocol: tcp
-          ToPort: 8081
+          ToPort: 8082
 
   ServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
@@ -70,9 +70,9 @@ Resources:
         IpProtocol: tcp
         ToPort: 22
       - SourceSecurityGroupName: !Ref ELBSecurityGroup
-        FromPort: 8081
+        FromPort: 8082
         IpProtocol: tcp
-        ToPort: 8081
+        ToPort: 8082
 
   MyLoadBalancer:
     Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
@@ -90,7 +90,7 @@ Resources:
         - Type: forward
           TargetGroupArn: !Ref MyLoadBalancerTargetGroup
       LoadBalancerArn: !Ref MyLoadBalancer
-      Port: 8081
+      Port: 8082
       Protocol: HTTP
 
   MyLoadBalancerTargetGroup:
@@ -99,15 +99,15 @@ Resources:
       HealthCheckIntervalSeconds: 30
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 3
-      Port: 8081
+      Port: 8082
       Protocol: HTTP
       UnhealthyThresholdCount: 5
       VpcId: !Ref ELBVPC
       Targets:
         - Id: !Ref MyInstance1
-          Port: 8081
+          Port: 8082
         - Id: !Ref MyInstance2
-          Port: 8081
+          Port: 8082
 Outputs:
   ELBDNSName:
     Description: The DNSName of the load balancer
